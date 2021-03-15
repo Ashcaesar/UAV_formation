@@ -50,12 +50,14 @@ To be filled.
 
 # Development
 [(Back to top)](#table-of-contents)  
-Advanced Cucker-Smale model  
+Advanced Cucker-Smale model.    
 The whole program is divided into three steps:  
 * Assemble  
   UAVs gather and go to the specified starting point at a similar velocity  
+  
 * Formation  
   Divide UAVs into several groups based on location coordinates  
+  
 * Flight  
   UAVs complete the flight mission following a certain formation  
   
