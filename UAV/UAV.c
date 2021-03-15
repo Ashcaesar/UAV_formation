@@ -314,7 +314,3 @@ double f_speedmatch() {
 	result = sqrt(result / (SIZE*(SIZE - 1)));
 	return result;
 }
-
-double f_division() {
-
-}
