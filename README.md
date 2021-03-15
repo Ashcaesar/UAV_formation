@@ -68,7 +68,9 @@ For more information, check out [this wiki](https://github.com/Ashcaesar/UAV_for
 # Contribute
 [(Back to top)](#uav-formation-flight)
 
-If you have any suggestions or contribution, just email me 3170102203@zju.edu.cn!  
+If you have any suggestions or problems, just email me 3170102203@zju.edu.cn!
+
+Contributions of any kind welcome!
 
 # License
 [(Back to top)](#uav-formation-flight)
