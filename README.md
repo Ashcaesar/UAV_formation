@@ -37,7 +37,7 @@ Here's a gif made by Matlab(It's actually 3D, but 2D animate looks more clearly)
 - [Footer](#footer)
 
 # Installation
-[(Back to top)](#table-of-contents)  
+[(Back to top)](#uav-formation-flight)  
 To use this project, first clone the repo on your device using the command below:
 
 ```git init```
@@ -45,12 +45,12 @@ To use this project, first clone the repo on your device using the command below
 ```git clone https://github.com/Ashcaesar/UAV_formation.git```
 
 # Usage
-[(Back to top)](#table-of-contents)
+[(Back to top)](#uav-formation-flight)
 
 To be filled.
 
 # Development
-[(Back to top)](#table-of-contents)  
+[(Back to top)](#uav-formation-flight)  
 Advanced Cucker-Smale model.  
 
 The whole program is divided into three steps:  
@@ -65,21 +65,21 @@ The whole program is divided into three steps:
   
 *Each UAV is regarded as a mass point, the simuulation environment is 3D.*
 
-Check out [this wiki](https://github.com/navendu-pottekkat/nsfw-filter/wiki) for inspiration.
+For more information, check out [this wiki](https://github.com/Ashcaesar/UAV_formation/wiki) for inspiration.
 
 # Contribute
-[(Back to top)](#table-of-contents)
+[(Back to top)](#uav-formation-flight)
 
 If you have contributions, need support, have suggestions, or just want to get in touch with me, just email me!  
 
 3170102203@zju.edu.cn
 
 # License
-[(Back to top)](#table-of-contents)
+[(Back to top)](#uav-formation-flight)
 
 [GNU General Public License version 3](https://opensource.org/licenses/GPL-3.0)
 
 # Footer
-[(Back to top)](#table-of-contents)
+[(Back to top)](#uav-formation-flight)
 
 ![Footer](https://github.com/Ashcaesar/UAV_formation/blob/master/fooooooter.png)
