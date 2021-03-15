@@ -31,8 +31,6 @@ Here's a gif made by Matlab(It's actually 3D, but 2D animate looks more clearly)
 - [Usage](#usage)
 - [Development](#development)
 - [Contribute](#contribute)
-    - [Sponsor](#sponsor)
-    - [Adding new features or fixing bugs](#adding-new-features-or-fixing-bugs)
 - [License](#license)
 - [Footer](#footer)
 
