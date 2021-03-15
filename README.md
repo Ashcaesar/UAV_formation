@@ -1,6 +1,7 @@
 C code for UAV formation based on Cucker-Smale model.
 
 Swarming is a collective behaviour exhibited by entities, particularly animals,of similar size which aggregate together, perhaps milling about the same spot or perhaps moving en masse or migrating in some direction.
+
 The simplest mathematical models of animal swarms generally represent individual animals as following three rules:
 #Move in the same direction as their neighbors
 #Remain close to their neighbors
