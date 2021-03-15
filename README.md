@@ -21,7 +21,7 @@ After you have introduced your project, it is a good idea to add a **Table of co
 
 Here is a sample TOC(*wow! such cool!*) that is actually the TOC for this README.
 
-- [Project Title](#uav-formation-flight)
+- [UAV Formation Flight](#uav-formation-flight)
 - [Demo-Preview](#demo-preview)
 - [Table of contents](#table-of-contents)
 - [Installation](#installation)
