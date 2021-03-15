@@ -7,7 +7,7 @@
 #define H          100        /*H为权重aij参数*/
 #define b          0.4        /*b为权重aij参数*/
 #define k1         1300       /*k1为个体间作用系数*/
-#define k2         80        /*k2为个体间作用系数*/
+#define k2         80         /*k2为个体间作用系数*/
 #define k3         0.5        /*k3为个体间作用系数*/
 #define k4         60         /*k4为目标趋向系数*/
 #define theta1     0.3        /*theta1为个体间作用系数*/
@@ -42,7 +42,7 @@ UAV uav[SIZE];
 axis sum = { 0,0,0 };
 axis target = { 1000,1000,1000 };      /*集结点坐标*/
 axis f_match(int);                     /*f_match为速度匹配项*/
-axis f_attract(int);		           /*f_attract为个体间吸引、排斥项*/
+axis f_attract(int);		       /*f_attract为个体间吸引、排斥项*/
 axis f_target(int);                    /*f_target为目标趋向作用项*/
 axis tMatch, tAttract, tTarget;        /*用于更新数据*/
 void f_initial();                      /*f_initial负责初始化*/
@@ -228,6 +228,7 @@ void f_bound(int i) {
 		else uav[i].acceleration.z = -Max_acceleration;
 	}
 
+	
 	if (fabs(uav[i].velocity.x) > Max_velocity) {
 		if (uav[i].velocity.x > Max_velocity) uav[i].velocity.x = Max_velocity;
 		else uav[i].velocity.x = -Max_velocity;
