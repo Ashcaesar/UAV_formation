@@ -5,19 +5,23 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/Ashcaesar/UAV_formation)
 ![GitHub](https://img.shields.io/github/license/Ashcaesar/UAV_formation)
 ![GitHub watchers](https://img.shields.io/github/watchers/Ashcaesar/UAV_formation?style=social)  
-
 C code for UAV formation based on `Cucker-Smale` model.  
-# Demo-Preview  
+
+# Demo-Preview
+Swarming is a collective behaviour exhibited by entities, particularly animals,of similar size which aggregate together, perhaps milling about the same spot or perhaps moving en masse or migrating in some direction.  
+
+The simplest mathematical models of animal swarms generally represent individual animals as __following three rules:__  
+* Move in the same direction as their neighbors  
+* Remain close to their neighbors  
+* Avoid collisions with their neighbors  
+("Swarm behaviour",from Wikipedia)
+
 Use the coordinate(data is stored in coordinate.txt) of each UAV to simulate the process  
-Here's a gif made by Matlab  
+  
+Here's a gif made by Matlab(It's actually 3D, but 2D animate looks more clearly)  
 ![Flock GIF](https://github.com/Ashcaesar/UAV_formation/blob/master/demo.gif)
 
-# Table of contents
-
-After you have introduced your project, it is a good idea to add a **Table of contents** or **TOC** as **cool** people say it. This would make it easier for people to navigate through your README and find exactly what they are looking for.
-
-Here is a sample TOC(*wow! such cool!*) that is actually the TOC for this README.
-
+# Table of contents  
 - [UAV Formation Flight](#uav-formation-flight)
 - [Demo-Preview](#demo-preview)
 - [Table of contents](#table-of-contents)
@@ -32,40 +36,32 @@ Here is a sample TOC(*wow! such cool!*) that is actually the TOC for this README
 
 # Installation
 [(Back to top)](#table-of-contents)
-
-*You might have noticed the **Back to top** button(if not, please notice, it's right there!). This is a good idea because it makes your README **easy to navigate.*** 
-
-The first one should be how to install(how to generally use your project or set-up for editing in their machine).
-
-This should give the users a concrete idea with instructions on how they can use your project repo with all the steps.
-
-Following this steps, **they should be able to run this in their device.**
-
-A method I use is after completing the README, I go through the instructions from scratch and check if it is working.
-
-Here is a sample instruction:
-
 To use this project, first clone the repo on your device using the command below:
 
 ```git init```
 
-```git clone https://github.com/navendu-pottekkat/nsfw-filter.git```
+```git clone https://github.com/Ashcaesar/UAV_formation.git```
 
 # Usage
 [(Back to top)](#table-of-contents)
 
-This is optional and it is used to give the user info on how to use the project after installation. This could be added in the Installation section also.
+To be filled.
 
 # Development
 [(Back to top)](#table-of-contents)
+_Advanced Cucker-Smale model_
+=
+The whole program is divided into three steps:  
+* Assemble  
+  UAVs gather and go to the specified starting point at a similar velocity  
+* Formation  
+  Divide UAVs into several groups based on location coordinates  
+* Flight  
+  UAVs complete the flight mission following a certain formation  
+  
+*Each UAV is regarded as a mass point, the simuulation environment is 3D.*
 
-This is the place where you give instructions to developers on how to modify the code.
-
-You could give **instructions in depth** of **how the code works** and how everything is put together.
-
-You could also give specific instructions to how they can setup their development environment.
-
-Ideally, you should keep the README simple. If you need to add more complex explanations, use a wiki. Check out [this wiki](https://github.com/navendu-pottekkat/nsfw-filter/wiki) for inspiration.
+Check out [this wiki](https://github.com/navendu-pottekkat/nsfw-filter/wiki) for inspiration.
 
 # Contribute
 [(Back to top)](#table-of-contents)
@@ -108,46 +104,4 @@ I personally add the name of the license and provide a link to it like below.
 # Footer
 [(Back to top)](#table-of-contents)
 
-Let's also add a footer because I love footers and also you **can** use this to convey important info.
-
-Let's make it an image because by now you have realised that multimedia in images == cool(*please notice the subtle programming joke).
-
-So that is it... You have completed your training young grasshopper. Now it is time for you to use this ideas for your projects.
-
-Don't forget your **README Sensei**(*cool twitter handle idea*) when your project takes off with your **Awesome README**.
-
-Leave a star in GitHub, give a clap in Medium and share this guide if you found this helpful.
-
-**Now folks, the moment you've all been waiting for! The footer!**
-***[Audible gasp]***
-
-<!-- Add the footer here -->
-
-![Footer](https://github.com/navendu-pottekkat/awesome-readme/blob/master/fooooooter.png)
-
- 
-C code for UAV formation based on `Cucker-Smale` model.  
-
-_Swarming_
-=
-Swarming is a collective behaviour exhibited by entities, particularly animals,of similar size which aggregate together, perhaps milling about the same spot or perhaps moving en masse or migrating in some direction.  
-
-The simplest mathematical models of animal swarms generally represent individual animals as following three rules:  
-* Move in the same direction as their neighbors  
-* Remain close to their neighbors  
-* Avoid collisions with their neighbors  
-("Swarm behaviour",from Wikipedia)
-
-_Advanced Cucker-Smale model_
-=
-The whole program is divided into three steps:  
-* Assemble  
-  UAVs gather and go to the specified starting point at a similar velocity  
-* Formation  
-  Divide UAVs into several groups based on location coordinates  
-* Flight  
-  UAVs complete the flight mission following a certain formation  
-
-
-*Each UAV is regarded as a mass point, the simuulation environment is 3D.*
-
+![Footer](https://github.com/Ashcaesar/UAV_formation/blob/master/fooooooter.png)
