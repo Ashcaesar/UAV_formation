@@ -36,7 +36,7 @@ Here's a gif made by Matlab(It's actually 3D, but 2D animate looks more clearly)
 - [Footer](#footer)
 
 # Installation
-[(Back to top)](#table-of-contents)
+[(Back to top)](#table-of-contents)  
 To use this project, first clone the repo on your device using the command below:
 
 ```git init```
@@ -49,9 +49,8 @@ To use this project, first clone the repo on your device using the command below
 To be filled.
 
 # Development
-[(Back to top)](#table-of-contents)
-_Advanced Cucker-Smale model_
-=
+[(Back to top)](#table-of-contents)  
+Advanced Cucker-Smale model  
 The whole program is divided into three steps:  
 * Assemble  
   UAVs gather and go to the specified starting point at a similar velocity  
