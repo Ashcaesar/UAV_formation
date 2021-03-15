@@ -50,7 +50,8 @@ To be filled.
 
 # Development
 [(Back to top)](#table-of-contents)  
-Advanced Cucker-Smale model.    
+Advanced Cucker-Smale model.  
+
 The whole program is divided into three steps:  
 * Assemble  
   UAVs gather and go to the specified starting point at a similar velocity  
