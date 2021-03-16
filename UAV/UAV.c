@@ -4,7 +4,7 @@
 #include"function.h"
 #include"parameter.h"
 
-UAV uav[SIZE];
+
 
 void main() {
 	int i;
@@ -20,6 +20,12 @@ void main() {
 		return;
 	}
 	f_initial();
+	extern UAV uav[SIZE];
+	extern axis sum;
+	extern axis p_origin;       /*原点坐标*/
+	extern axis p_start;        /*出发点坐标*/
+	extern axis p_final;        /*终点坐标*/
+
 	for (t = 0; t < 300; t += delt) {
 		if (f_stop()) break;
 		fprintf(fp2, "%f %f\n", f_dispersion(), f_speedmatch());

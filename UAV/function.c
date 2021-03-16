@@ -6,11 +6,11 @@
 #include"function.h"
 #include"parameter.h"
 
-extern UAV uav[SIZE];
+UAV uav[SIZE];
 axis sum = { 0,0,0 };
-axis p_origin = { 0,0,0 };             /*原点坐标*/
-axis p_start = { 300,300,300 };        /*出发点坐标*/
-axis p_final = { 500,1500,800 };       /*终点坐标*/
+axis p_origin = { 0,0,0 };
+axis p_start = { 1000,1000,100 };
+axis p_final = { 500,1500,-200 };
 
 double f_metric(axis A, axis B) {
 	double dis;
@@ -234,10 +234,13 @@ int f_leader() {
 	return num;
 }
 
-f_kmeans() {
+void f_kmeans(int leader) {
 	int i;
 
+
+
 	for (i = 0; i < SIZE; i++) {
+		if (i == leader) break;
 
 	}
 }
