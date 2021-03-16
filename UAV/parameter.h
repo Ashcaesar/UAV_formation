@@ -25,10 +25,4 @@
 #define Max_acceleration	0.5
 #define Min_acceleration    0
 
-axis sum = { 0,0,0 };
-axis p_origin = { 0,0,0 };             /*原点坐标*/
-axis p_start = { 300,300,300 };        /*出发点坐标*/
-axis p_final = { 500,1500,800 };       /*终点坐标*/
-
-#endif // PARAMETER_H_INCLUDED
-
+#endif

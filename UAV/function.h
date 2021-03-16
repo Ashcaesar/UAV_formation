@@ -31,4 +31,4 @@ double f_metric(axis, axis);           /*f_metric实现向量度量*/
 double f_dispersion();                 /*f_dispersion计算离散度*/
 double f_speedmatch();				   /*f_speedmatch计算速度匹配值*/
 
-#endif // FUNCTION_H_INCLUDED
+#endif
