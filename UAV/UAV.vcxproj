@@ -155,7 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="parameter.h" />
-    <ClInclude Include="uav.h" />
+    <ClInclude Include="function.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

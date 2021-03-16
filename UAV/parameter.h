@@ -1,7 +1,7 @@
 #ifndef PARAMETER_H_INCLUDED
 #define PARAMETER_H_INCLUDED
 
-#include"uav.h"
+#include"function.h"
 
 #define SIZE				50				/*SIZE为群体数量*/
 #define num_team			4				/*num_group为编队数量*/

@@ -20,10 +20,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="uav.h">
+    <ClInclude Include="parameter.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="parameter.h">
+    <ClInclude Include="function.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

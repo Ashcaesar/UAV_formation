@@ -1,5 +1,5 @@
-#ifndef UAV_H_INCLUDED
-#define UAV_H_INCLUDED
+#ifndef FUNCTION_H_INCLUDED
+#define FUNCTION_H_INCLUDED
 
 typedef struct {
 	double x;
@@ -31,4 +31,4 @@ double f_metric(axis, axis);           /*f_metric实现向量度量*/
 double f_dispersion();                 /*f_dispersion计算离散度*/
 double f_speedmatch();				   /*f_speedmatch计算速度匹配值*/
 
-#endif // UAV_H_INCLUDED
+#endif // FUNCTION_H_INCLUDED

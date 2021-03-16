@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<math.h>
 #include<time.h>
-#include"uav.h"
+#include"function.h"
 #include"parameter.h"
 
 UAV uav[SIZE];
