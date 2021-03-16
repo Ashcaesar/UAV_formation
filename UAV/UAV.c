@@ -21,7 +21,9 @@
 #define delt				0.02			/*delt为时间步长*/
 #define PI					3.14159265
 #define Max_velocity		50
-#define Max_acceleration	20
+#define Min_velocity        5      
+#define Max_acceleration	5
+#define Min_acceleration    0
 
 
 typedef struct {
@@ -50,7 +52,7 @@ axis f_attract(int);		           /*f_attract为个体间吸引、排斥项*/
 axis f_target(int);                    /*f_target为目标趋向作用项*/
 axis tMatch, tAttract, tTarget;        /*用于更新数据*/
 void f_initial();                      /*f_initial负责初始化*/
-void f_bound(int);                     /*f_bound对个体的加速度和速度进行限制*/
+double f_sat(double, double, double);  /*f_sat对个体的加速度和速度进行限制*/
 void f_crash();                        /*f_crash统计发生碰撞次数*/
 void f_update(int);                    /*f_update更新各项数据*/
 int f_stop();                          /*f_stop判断集结是否完成,条件为集群速度方向和距离*/
@@ -83,9 +85,10 @@ void main() {
 		}
 		f_crash();
 	}
-	fclose(fp,fp2);
+	fclose(fp);
+	fclose(fp2);
 	
-	printf("长机编号为%d", f_leader());
+	printf("碰撞次数为%d,长机编号为%d", num_crash, f_leader());
 
 }
 
@@ -198,7 +201,7 @@ void f_initial() {
 	} while (num_crash > 0);
 
 	for (i = 0; i < SIZE; i++) {
-		uav[i].speed = rand() % 10;
+		uav[i].speed = rand() % 10 + 10;
 		uav[i].phi = (rand() % 360)*PI / 180;
 		/*uav[i].phi = (rand() % 90 - 45)*PI / 180;*/
 		uav[i].theta = (rand() % 90 - 45)*PI / 180;
@@ -211,33 +214,17 @@ void f_initial() {
 	}
 }
 
-void f_bound(int i) {
-	if (fabs(uav[i].acceleration.x) > Max_acceleration) {
-		if (uav[i].acceleration.x > Max_acceleration) uav[i].acceleration.x = Max_acceleration;
-		else uav[i].acceleration.x = -Max_acceleration;
+double f_sat(double x, double min, double max) {
+	double result = x;
+	if (fabs(x) < min) {
+		if (x > 0) result = min;
+		else result = -min;
 	}
-	if (fabs(uav[i].acceleration.y) > Max_acceleration) {
-		if (uav[i].acceleration.y > Max_acceleration) uav[i].acceleration.y = Max_acceleration;
-		else uav[i].acceleration.y = -Max_acceleration;
+	else  if (fabs(x) > max) {
+		if (x > 0) result = max;
+		else result = -max;
 	}
-	if (fabs(uav[i].acceleration.z) > Max_acceleration) {
-		if (uav[i].acceleration.z > Max_acceleration) uav[i].acceleration.z = Max_acceleration;
-		else uav[i].acceleration.z = -Max_acceleration;
-	}
-
-	
-	if (fabs(uav[i].velocity.x) > Max_velocity) {
-		if (uav[i].velocity.x > Max_velocity) uav[i].velocity.x = Max_velocity;
-		else uav[i].velocity.x = -Max_velocity;
-	}
-	if (fabs(uav[i].velocity.y) > Max_velocity) {
-		if (uav[i].velocity.y > Max_velocity) uav[i].velocity.y = Max_velocity;
-		else uav[i].velocity.y = -Max_velocity;
-	}
-	if (fabs(uav[i].velocity.z) > Max_velocity) {
-		if (uav[i].velocity.z > Max_velocity) uav[i].velocity.z = Max_velocity;
-		else uav[i].velocity.z = -Max_velocity;
-	}
+	return result;
 }
 
 void f_update(int i) {
@@ -248,12 +235,16 @@ void f_update(int i) {
 	uav[i].acceleration.x = tMatch.x + tAttract.x + tTarget.x;
 	uav[i].acceleration.y = tMatch.y + tAttract.y + tTarget.y;
 	uav[i].acceleration.z = tMatch.z + tAttract.z + tTarget.z;
-	f_bound(i);
+	f_sat(uav[i].acceleration.x, Min_acceleration, Max_acceleration);
+	f_sat(uav[i].acceleration.y, Min_acceleration, Max_acceleration);
+	f_sat(uav[i].acceleration.z, Min_acceleration, Max_acceleration);
 
 	uav[i].velocity.x += uav[i].acceleration.x*delt;
 	uav[i].velocity.y += uav[i].acceleration.y*delt;
 	uav[i].velocity.z += uav[i].acceleration.z*delt;
-	f_bound(i);
+	f_sat(uav[i].velocity.x, Min_velocity, Max_velocity);
+	f_sat(uav[i].velocity.y, Min_velocity, Max_velocity);
+	f_sat(uav[i].velocity.z, Min_velocity, Max_velocity);
 
 	uav[i].position.x += uav[i].velocity.x*delt;
 	uav[i].position.y += uav[i].velocity.y*delt;
