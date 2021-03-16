@@ -14,7 +14,7 @@ typedef struct {
 	double speed;
 	double phi;
 	double theta;
-	int ID;
+	int teamID;
 }UAV;
 
 int num_crash;

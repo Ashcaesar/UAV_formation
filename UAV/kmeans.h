@@ -2,8 +2,8 @@
 #define KMEANS_H_INCLUDED
 
 void kmeans_initial();
-void kmeans_update();
-
+void update_team();
+double kmeans_dis(axis, axis);
 
 #endif // !KMEANS_H_INCLUDED
 
