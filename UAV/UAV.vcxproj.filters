@@ -15,10 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="UAV.c">
+    <ClCompile Include="function.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="function.c">
+    <ClCompile Include="kmeans.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -27,6 +30,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="function.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="kmeans.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

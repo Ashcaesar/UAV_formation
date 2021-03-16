@@ -43,6 +43,7 @@ void f_initial() {
 		uav[i].acceleration.x = 0;
 		uav[i].acceleration.y = 0;
 		uav[i].acceleration.z = 0;
+		uav[i].ID = -1;
 	}
 }
 
@@ -232,15 +233,4 @@ int f_leader() {
 		}
 	}
 	return num;
-}
-
-void f_kmeans(int leader) {
-	int i;
-
-
-
-	for (i = 0; i < SIZE; i++) {
-		if (i == leader) break;
-
-	}
 }

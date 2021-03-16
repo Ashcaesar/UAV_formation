@@ -4,7 +4,12 @@
 #include"function.h"
 #include"parameter.h"
 
-
+extern UAV uav[SIZE];
+extern axis sum;            /*临时存储数据*/
+extern axis p_origin;       /*原点坐标*/
+extern axis p_start;        /*出发点坐标*/
+extern axis p_final;        /*终点坐标*/
+extern int num_leader;      /*记录长机编号*/
 
 void main() {
 	int i;
@@ -20,12 +25,6 @@ void main() {
 		return;
 	}
 	f_initial();
-	extern UAV uav[SIZE];
-	extern axis sum;
-	extern axis p_origin;       /*原点坐标*/
-	extern axis p_start;        /*出发点坐标*/
-	extern axis p_final;        /*终点坐标*/
-
 	for (t = 0; t < 300; t += delt) {
 		if (f_stop()) break;
 		fprintf(fp2, "%f %f\n", f_dispersion(), f_speedmatch());
@@ -37,6 +36,7 @@ void main() {
 	}
 	fclose(fp);
 	fclose(fp2);
-	printf("碰撞次数为%d,长机编号为%d", num_crash, f_leader());
+	num_leader = f_leader();
+	uav[num_leader].ID = 0;
+	printf("碰撞次数为%d,长机编号为%d", num_crash, num_leader);
 }
-

@@ -152,9 +152,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="function.c" />
-    <ClCompile Include="UAV.c" />
+    <ClCompile Include="kmeans.c" />
+    <ClCompile Include="main.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="kmeans.h" />
     <ClInclude Include="parameter.h" />
     <ClInclude Include="function.h" />
   </ItemGroup>
