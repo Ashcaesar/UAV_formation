@@ -18,7 +18,7 @@ The simplest mathematical models of animal swarms generally represent individual
 
 Use the coordinate(data is stored in coordinate.txt) of each UAV to simulate the process  
   
-Here's a gif made by Matlab`(It's actually 3D, but 2D animate looks more clearly)`  
+Here's a gif made by Matlab`(It's actually 3D, but 2D animation looks more clearly)`  
 
 ![Flock GIF](https://github.com/Ashcaesar/UAV_formation/blob/master/demo.gif)
 
