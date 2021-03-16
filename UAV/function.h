@@ -30,5 +30,6 @@ int f_leader();						   /*f_leader确定长机编号*/
 double f_metric(axis, axis);           /*f_metric实现向量度量*/
 double f_dispersion();                 /*f_dispersion计算离散度*/
 double f_speedmatch();				   /*f_speedmatch计算速度匹配值*/
+void f_kmeans();                       /*f_kmeans实现小组划分*/
 
 #endif
