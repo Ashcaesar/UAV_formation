@@ -19,15 +19,15 @@ void main() {
 	FILE *fp;
 	FILE *fp2;
 	FILE *fp3;
-	if ((fp = fopen("index.txt", "wb")) == NULL) {
+	if ((fp = fopen("data/index.txt", "wb")) == NULL) {
 		printf("离散度写入失败!\n");
 		return;
 	}
-	if ((fp2 = fopen("coordinate.txt", "wb")) == NULL) {
+	if ((fp2 = fopen("data/coordinate.txt", "wb")) == NULL) {
 		printf("坐标写入失败!\n");
 		return;
 	}
-	if ((fp3 = fopen("team.txt", "wb")) == NULL) {
+	if ((fp3 = fopen("data/team.txt", "wb")) == NULL) {
 		printf("分队写入失败!\n");
 		return;
 	}
@@ -48,14 +48,14 @@ void main() {
 	uav[num_leader].teamID = 0;
 	printf("碰撞次数为%d,长机编号为%d", num_crash, num_leader);
 
-	kmeans_initial();
+	/*kmeans_initial();
 	do {
 		update_team();
 		update_centroid();
 	} while (change != 0);
 	for (i = 0; i < SIZE; i++) {
 		fprintf(fp3, "%d %d %d %d\n", (int)uav[i].position.x, (int)uav[i].position.y, (int)uav[i].position.z, uav[i].teamID);
-	}
+	}*/
 	fclose(fp3);
 
 }
