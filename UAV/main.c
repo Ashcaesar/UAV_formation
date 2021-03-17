@@ -19,11 +19,11 @@ void main() {
 	FILE *fp;
 	FILE *fp2;
 	FILE *fp3;
-	if ((fp = fopen("coordinate.txt", "wb")) == NULL) {
+	if ((fp = fopen("index.txt", "wb")) == NULL) {
 		printf("离散度写入失败!\n");
 		return;
 	}
-	if ((fp2 = fopen("index.txt", "wb")) == NULL) {
+	if ((fp2 = fopen("coordinate.txt", "wb")) == NULL) {
 		printf("坐标写入失败!\n");
 		return;
 	}
