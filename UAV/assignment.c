@@ -2,33 +2,55 @@
 #include<math.h>
 #include<time.h>
 #include<stdlib.h>
+#include<stdbool.h>
 
-#include"kmeans.h"
-#include"function.h"
 #include"parameter.h"
+#include"assemble.h"
+#include"assignment.h"
+
 
 UAV uav[SIZE];
 int change;
 int num_leader;
 axis centroid[num_team + 1];
 
-void kmeans_initial() {
+void initial_centroid() {	
+	int i, j, k, num;
+	double temp_dis;
+	double sum = 0;
+	double probability;
+	double min_dis[SIZE] = { 10*D };
+	double P[SIZE];
+	
 	srand((unsigned)time(NULL));
-	int i, num;
-	for (i = 1; i <= num_team; i++) {
-		num = rand() % SIZE;
-		if (uav[num].teamID == -1) {
-			uav[num].teamID = i;
-			centroid[i] = uav[num].position;
+	num = rand() % SIZE;
+	uav[num].teamID = 1;
+	centroid[1] = uav[num].position;		
+	
+	for (i = 2; i <= num_team; i++) {
+		for (j = 0; j < SIZE; j++) {
+			for (k = 1; k < i; k++) {
+				temp_dis = get_dis(uav[j].position, centroid[k]);
+				if (temp_dis < min_dis[j]) min_dis[j] = temp_dis;
+			}
+			min_dis[j] = pow(min_dis[j], 2);
+			sum += min_dis[j];
 		}
-	}
-}
 
-double kmeans_dis(axis A, axis B) {
-	double dis;
-	dis = pow(A.x - B.x, 2) + pow(A.y - B.y, 2) + pow(A.z - B.z, 2);
-	dis = sqrt(dis);
-	return dis;
+		probability = rand();
+		for (j = 0; j < SIZE; j++) {
+			if (j == 0) P[j] = min_dis[j] / sum;
+			else P[j] = min_dis[j] / sum + P[j - 1];
+
+			if (P[j] >= probability && uav[j].teamID == -1) {
+				uav[j].teamID = i;
+				centroid[i] = uav[j].position;
+				break;
+			}
+		}
+		for (j = 0; j < SIZE; j++) min_dis[j] = 10 * D;
+		sum = 0;
+	}
 }
 
 void update_team() {
@@ -38,9 +60,9 @@ void update_team() {
 	for (i = 0; i < SIZE; i++) {
 		if (i == num_leader) continue;
 		tempID = 1;
-		min_dis = kmeans_dis(uav[i].position, centroid[1]);
+		min_dis = get_dis(uav[i].position, centroid[1]);
 		for (j = 2; j <= num_team; j++) {
-			dis = kmeans_dis(uav[i].position, centroid[j]);
+			dis = get_dis(uav[i].position, centroid[j]);
 			if (dis < min_dis) {
 				tempID = j;
 				min_dis = dis;				

@@ -1,8 +1,9 @@
 ﻿#include<stdio.h>
 #include<math.h>
 
-#include"kmeans.h"
-#include"function.h"
+#include"model.h"
+#include"assemble.h"
+#include"assignment.h"
 #include"parameter.h"
 
 extern UAV uav[SIZE];
@@ -32,30 +33,29 @@ void main() {
 		return;
 	}
 
-	f_initial();
-	for (t = 0; t < 300; t += delt) {
-		if (f_stop()) break;
-		fprintf(fp, "%f %f\n", f_dispersion(), f_speedmatch());
-		for (i = 0; i < SIZE; i++) {
-			fprintf(fp2, "%d %d %d\n", (int)uav[i].position.x, (int)uav[i].position.y, (int)uav[i].position.z);
-			f_update(i);
+		initial_uav();
+		for (t = 0; t < 100; t += delt) {
+			if (finish_assemble()) break;
+			fprintf(fp, "%f %f\n", f_dispersion(), f_speedmatch());
+			for (i = 0; i < SIZE; i++) {
+				fprintf(fp2, "%d %d %d\n", (int)uav[i].position.x, (int)uav[i].position.y, (int)uav[i].position.z);
+				update_assemble(i);
+			}
+			crash();
 		}
-		f_crash();
-	}
+
 	fclose(fp);
 	fclose(fp2);
-	num_leader = f_leader();
-	uav[num_leader].teamID = 0;
-	printf("碰撞次数为%d,长机编号为%d", num_crash, num_leader);
-
-	/*kmeans_initial();
+	
+	initial_centroid();
 	do {
 		update_team();
 		update_centroid();
 	} while (change != 0);
 	for (i = 0; i < SIZE; i++) {
 		fprintf(fp3, "%d %d %d %d\n", (int)uav[i].position.x, (int)uav[i].position.y, (int)uav[i].position.z, uav[i].teamID);
-	}*/
+	}
 	fclose(fp3);
-
+	num_leader = get_leader();
+	printf("碰撞次数为%d,长机编号为%d", num_crash, num_leader);
 }

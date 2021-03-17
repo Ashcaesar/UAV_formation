@@ -15,13 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="function.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="kmeans.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="main.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="assemble.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="assignment.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="model.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -29,10 +32,13 @@
     <ClInclude Include="parameter.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="function.h">
+    <ClInclude Include="model.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="kmeans.h">
+    <ClInclude Include="assemble.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="assignment.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
