@@ -1,12 +1,14 @@
 #include<stdio.h>
 #include<math.h>
 #include<time.h>
+#include<stdlib.h>
 
 #include"kmeans.h"
 #include"function.h"
 #include"parameter.h"
 
 UAV uav[SIZE];
+int change;
 int num_leader;
 axis centroid[num_team + 1];
 
@@ -32,7 +34,9 @@ double kmeans_dis(axis A, axis B) {
 void update_team() {
 	int i, j, tempID;
 	double dis, min_dis;
+	change = 0;
 	for (i = 0; i < SIZE; i++) {
+		if (i == num_leader) continue;
 		tempID = 1;
 		min_dis = kmeans_dis(uav[i].position, centroid[1]);
 		for (j = 2; j <= num_team; j++) {
@@ -42,7 +46,11 @@ void update_team() {
 				min_dis = dis;				
 			}
 		}
-		uav[i].teamID = tempID;
+		if (uav[i].teamID == tempID) continue;
+		else { 
+			change = 1;
+			uav[i].teamID = tempID;
+		}
 	}
 }
 

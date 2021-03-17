@@ -3,7 +3,7 @@
 
 #include"function.h"
 
-#define SIZE				50				/*SIZE为群体数量*/
+#define SIZE				100				/*SIZE为群体数量*/
 #define num_team			4				/*num_group为编队数量*/
 #define H					100				/*H为权重aij参数*/
 #define b					0.4				/*b为权重aij参数*/
