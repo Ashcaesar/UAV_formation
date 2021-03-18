@@ -15,8 +15,11 @@ typedef struct {
 	double phi;
 	double theta;
 	int teamID;
+	int leader;
 }UAV;
 
 double get_dis(axis, axis);
+double f_dispersion();
+double f_speedmatch();
 
 #endif //

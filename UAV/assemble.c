@@ -37,6 +37,7 @@ void initial_uav() {
 		uav[i].acceleration.y = 0;
 		uav[i].acceleration.z = 0;
 		uav[i].teamID = -1;
+		uav[i].leader = -2;
 	}
 }
 
@@ -180,51 +181,4 @@ void crash() {
 			}
 		}
 	}
-}
-
-double f_dispersion() {
-	int i, j;
-	double dis, result;
-	result = 0;
-	for (i = 0; i < SIZE; i++) {
-		for (j = 0; j < SIZE; j++) {
-			if (i != j) {
-				dis = get_dis(uav[i].position, uav[j].position);
-				result += dis * dis;
-			}
-		}
-	}
-	result = sqrt(result / (SIZE*(SIZE - 1)));
-	return result;
-}
-
-double f_speedmatch() {
-	int i, j;
-	double dis, result;
-	result = 0;
-	for (i = 0; i < SIZE; i++) {
-		for (j = 0; j < SIZE; j++) {
-			if (i != j) {
-				dis = get_dis(uav[i].velocity, uav[j].velocity);
-				result += dis * dis;
-			}
-		}
-	}
-	result = sqrt(result / (SIZE*(SIZE - 1)));
-	return result;
-}
-
-int get_leader() {
-	int i, num = 0;
-	double dis, temp;
-	dis = get_dis(uav[0].position, p_final);
-	for (i = 1; i < SIZE; i++) {
-		temp = get_dis(uav[i].position, p_final);
-		if (temp < dis) {
-			dis = temp;
-			num = i;
-		}
-	}
-	uav[num].teamID = 0;
-	return num;
 }

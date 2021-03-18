@@ -11,7 +11,7 @@ extern axis sum;            /*临时存储数据*/
 extern axis p_origin;       /*原点坐标*/
 extern axis p_start;        /*出发点坐标*/
 extern axis p_final;        /*终点坐标*/
-extern int num_leader;      /*记录长机编号*/
+extern int leader_main;     /*记录长机编号*/
 extern int change;          /*判定kmeans分组是否完成*/
 
 void main() {
@@ -52,10 +52,12 @@ void main() {
 		update_team();
 		update_centroid();
 	} while (change != 0);
+	leader_main = get_main_leader();
+	get_team_leader();
 	for (i = 0; i < SIZE; i++) {
 		fprintf(fp3, "%d %d %d %d\n", (int)uav[i].position.x, (int)uav[i].position.y, (int)uav[i].position.z, uav[i].teamID);
 	}
 	fclose(fp3);
-	num_leader = get_leader();
-	printf("碰撞次数为%d,长机编号为%d", num_crash, num_leader);
+
+	for (i = 0; i < SIZE; i++) printf("uav%2d: team:%d leader:%d\n", i, uav[i].teamID, uav[i].leader);
 }
