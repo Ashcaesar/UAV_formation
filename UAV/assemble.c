@@ -9,7 +9,7 @@
 UAV uav[SIZE];
 axis sum = { 0,0,0 };
 axis p_origin = { 0,0,0 };
-axis p_start = { 1000,1000,100 };
+axis p_start = { 1000,1000,1000 };
 axis p_final = { 500,1500,-200 };
 
 void initial_uav() {
@@ -18,9 +18,9 @@ void initial_uav() {
 	do {
 		num_crash = 0;
 		for (i = 0; i < SIZE; i++) {
-			uav[i].position.x = rand() % 100;
-			uav[i].position.y = rand() % 100;
-			uav[i].position.z = rand() % 10 - 5;
+			uav[i].position.x = rand() % 200;
+			uav[i].position.y = rand() % 200;
+			uav[i].position.z = rand() % 200;
 		}
 		crash();
 	} while (num_crash > 0);
@@ -128,33 +128,6 @@ void update_assemble(int i) {
 	uav[i].speed = get_dis(uav[i].velocity, p_origin);
 	uav[i].phi = atan2(uav[i].velocity.z, sqrt(pow(uav[i].velocity.x, 2) + pow(uav[i].velocity.y, 2)));
 	uav[i].theta = atan2(uav[i].velocity.y, uav[i].velocity.x);
-}
-
-int finish_assemble() {
-	int i;
-	double range = 0, V = 0, angle_to_target = 0;
-	axis Xcg = { 0,0,0 };
-	axis Vcg = { 0,0,0 };
-	axis dis = { 0,0,0 };
-	for (i = 0; i < SIZE; i++) {
-		Xcg.x += uav[i].position.x;
-		Xcg.y += uav[i].position.y;
-		Xcg.z += uav[i].position.z;
-		Vcg.x += uav[i].velocity.x;
-		Vcg.y += uav[i].velocity.y;
-		Vcg.z += uav[i].velocity.z;
-	}
-	Xcg.x /= SIZE;
-	Xcg.y /= SIZE;
-	Xcg.z /= SIZE;
-	Vcg.x /= SIZE;
-	Vcg.y /= SIZE;
-	Vcg.z /= SIZE;
-	range = get_dis(p_start, Xcg);
-	V = get_dis(Vcg, p_origin);
-	angle_to_target = fabs(acos((dis.x*Vcg.x + dis.y*Vcg.y + dis.z*Vcg.z) / (range * V)));
-	if (range <= 50 && angle_to_target <= 10) return 1;
-	else return 0;
 }
 
 double limit_uav(double x, double min, double max) {

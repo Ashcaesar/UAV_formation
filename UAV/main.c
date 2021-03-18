@@ -11,12 +11,13 @@ extern axis sum;            /*临时存储数据*/
 extern axis p_origin;       /*原点坐标*/
 extern axis p_start;        /*出发点坐标*/
 extern axis p_final;        /*终点坐标*/
+extern axis Xcg;
 extern int leader_main;     /*记录长机编号*/
 extern int change;          /*判定kmeans分组是否完成*/
 
 void main() {
 	int i;
-	double t;
+	double t, dis, angle, dispersion, speedmatch;
 	FILE *fp;
 	FILE *fp2;
 	FILE *fp3;
@@ -35,8 +36,13 @@ void main() {
 
 		initial_uav();
 		for (t = 0; t < 100; t += delt) {
-			if (finish_assemble()) break;
-			fprintf(fp, "%f %f\n", f_dispersion(), f_speedmatch());
+			get_Xcg();
+			dis = dis_to_target(p_start);
+			angle = angle_to_target(p_start);
+			dispersion = f_dispersion();
+			speedmatch = f_speedmatch();
+			fprintf(fp, "%f %f %f %f\n", speedmatch, dispersion, dis, angle);
+			if (dis <= 100 && angle <= 30) break;		
 			for (i = 0; i < SIZE; i++) {
 				fprintf(fp2, "%d %d %d\n", (int)uav[i].position.x, (int)uav[i].position.y, (int)uav[i].position.z);
 				update_assemble(i);
@@ -55,9 +61,9 @@ void main() {
 	leader_main = get_main_leader();
 	get_team_leader();
 	for (i = 0; i < SIZE; i++) {
-		fprintf(fp3, "%d %d %d %d\n", (int)uav[i].position.x, (int)uav[i].position.y, (int)uav[i].position.z, uav[i].teamID);
+		fprintf(fp3, "%d  %d %d %d\n", (int)uav[i].position.x, (int)uav[i].position.y, (int)uav[i].position.z, uav[i].teamID);
 	}
 	fclose(fp3);
 
-	for (i = 0; i < SIZE; i++) printf("uav%2d: team:%d leader:%d\n", i, uav[i].teamID, uav[i].leader);
+	printf("%.2fs crash:%d\n", t, num_crash);
 }

@@ -4,18 +4,24 @@
 #include"model.h"
 
 int num_crash;
-axis f_match(int);					   /*f_match为速度匹配项*/
-axis f_attract(int);		           /*f_attract为个体间吸引、排斥项*/
-axis f_target(int);                    /*f_target为目标趋向作用项*/
-axis tMatch, tAttract, tTarget;        /*用于更新数据*/
-void initial_uav();                    /*f_initial负责初始化*/
-double limit_uav(double, double, double);  /*f_sat对个体的加速度和速度进行限制*/
-void crash();                        /*f_crash统计发生碰撞次数*/
-void update_assemble(int);                    /*f_update更新各项数据*/
-int finish_assemble();                          /*f_stop判断集结是否完成,条件为集群速度方向和距离*/
-double f_dispersion();                 /*f_dispersion计算离散度*/
-double f_speedmatch();				   /*f_speedmatch计算速度匹配值*/
+axis f_match(int);
+axis f_attract(int);
+axis f_target(int);
+axis tMatch, tAttract, tTarget;
+void initial_uav();
+double limit_uav(double, double, double);
+void crash();
+void update_assemble(int);
 
+//num_crash记录碰撞次数
+//f_match为速度匹配项
+//f_attract为个体间吸引、排斥项
+//f_target为目标趋向作用项
+//tMatch, tAttract, tTarget用于更新数据
+//initial_uav负责初始化无人机信息
+//limit_uav对无人机速度、加速度进行限制
+//crash计算碰撞次数
+//update_assemble负责集群阶段数据更新
 
 
 #endif
