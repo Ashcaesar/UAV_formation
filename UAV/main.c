@@ -7,13 +7,21 @@
 #include"parameter.h"
 
 extern UAV uav[SIZE];
-extern axis sum;            /*临时存储数据*/
-extern axis p_origin;       /*原点坐标*/
-extern axis p_start;        /*出发点坐标*/
-extern axis p_final;        /*终点坐标*/
+extern axis sum;
 extern axis Xcg;
-extern int leader_main;     /*记录长机编号*/
-extern int change;          /*判定kmeans分组是否完成*/
+extern axis p_origin;
+extern axis p_start;
+extern axis p_final;
+extern int leader_main;
+extern int team_change;
+
+//sum临时存储数据用以函数计算
+//Xcg存储集群质心位置
+//p_origin为原点坐标
+//p_start为出发点坐标
+//p_final为终点坐标
+//leader_main存储中心长机编号
+//team_change判定kmeans迭代是否完成
 
 void main() {
 	int i;
@@ -57,7 +65,7 @@ void main() {
 	do {
 		update_team();
 		update_centroid();
-	} while (change != 0);
+	} while (team_change != 0);
 	leader_main = get_main_leader();
 	get_team_leader();
 	for (i = 0; i < SIZE; i++) {

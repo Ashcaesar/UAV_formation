@@ -10,7 +10,7 @@
 
 
 UAV uav[SIZE];
-int change;
+int team_change;
 int leader_main;
 axis p_final;
 axis centroid[num_team + 1];
@@ -66,7 +66,7 @@ void initial_centroid() {
 void update_team() {
 	int i, j, tempID;
 	double dis, min_dis;
-	change = 0;
+	team_change = 0;
 	for (i = 0; i < SIZE; i++) {
 		tempID = 1;
 		min_dis = get_dis(uav[i].position, centroid[1]);
@@ -79,7 +79,7 @@ void update_team() {
 		}
 		if (uav[i].teamID == tempID) continue;
 		else { 
-			change = 1;
+			team_change = 1;
 			uav[i].teamID = tempID;
 		}
 	}
