@@ -5,11 +5,11 @@
 #define num_team			4				/*num_group为编队数量*/
 #define H					100				/*H为权重aij参数*/
 #define b					0.4				/*b为权重aij参数*/
-#define k1					1300			/*k1为个体间作用系数*/
-#define k2					80				/*k2为个体间作用系数*/
+#define k1					1000			/*k1为个体间作用系数*/
+#define k2					40				/*k2为个体间作用系数*/
 #define k3					0.5				/*k3为个体间作用系数*/
 #define k4					60				/*k4为目标趋向系数*/
-#define theta1				0.1				/*theta1为个体间作用系数*/
+#define theta1				1.1				/*theta1为个体间作用系数*/
 #define theta2				0.1				/*theta2为个体间作用系数*/
 #define theta3				0.3				/*theta3为个体间作用系数*/
 #define alpha				0.1				/*alpha为目标趋向系数*/
@@ -22,5 +22,7 @@
 #define Min_velocity        10      
 #define Max_acceleration	0.5
 #define Min_acceleration    0
+
+//k1/k2=25^(theta1-ttheta2)
 
 #endif
