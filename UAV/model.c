@@ -72,7 +72,7 @@ double f_dispersion() {
 			}
 		}
 	}
-	result = sqrt(result / (SIZE*(SIZE - 1)));
+	result = sqrt(result) / SIZE;
 	return result;
 }
 
@@ -88,6 +88,6 @@ double f_speedmatch() {
 			}
 		}
 	}
-	result = sqrt(result / (SIZE*(SIZE - 1)));
+	result = sqrt(result) / SIZE;
 	return result;
 }

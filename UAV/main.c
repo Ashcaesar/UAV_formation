@@ -50,7 +50,7 @@ void main() {
 			dispersion = f_dispersion();
 			speedmatch = f_speedmatch();
 			fprintf(fp, "%f %f %f %f\n", speedmatch, dispersion, dis, angle);
-			if (dis <= 100 && angle <= 30) break;		
+			if (dis <= 100 && angle <= 15) break;		
 			for (i = 0; i < SIZE; i++) {
 				fprintf(fp2, "%d %d %d\n", (int)uav[i].position.x, (int)uav[i].position.y, (int)uav[i].position.z);
 				update_assemble(i);
