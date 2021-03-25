@@ -6,7 +6,7 @@
 #include"assignment.h"
 #include"parameter.h"
 
-extern UAV uav[SIZE];
+extern UAV uav[SIZE+1];
 extern axis sum;
 extern axis Xcg;
 extern axis p_origin;
@@ -24,8 +24,8 @@ extern int team_change;
 //team_change判定kmeans迭代是否完成
 
 void main() {
-	int i;
-	double t, dis, angle, dispersion, speedmatch;
+	int i, j;
+	double t, dis, temp_dis, min_dis, angle, dispersion, speedmatch;
 	FILE *fp;
 	FILE *fp2;
 	FILE *fp3;
@@ -49,10 +49,18 @@ void main() {
 			angle = angle_to_target(p_start);
 			dispersion = f_dispersion();
 			speedmatch = f_speedmatch();
-			fprintf(fp, "%f %f %f %f\n", speedmatch, dispersion, dis, angle);
-			if (dis <= 100 && angle <= 15) break;		
-			for (i = 0; i < SIZE; i++) {
-				fprintf(fp2, "%d %d %d\n", (int)uav[i].position.x, (int)uav[i].position.y, (int)uav[i].position.z);
+			min_dis = 100;
+			for (i = 1; i <= SIZE; i++) {
+				for (j = 1; j <= SIZE; j++) {
+					if (i == j) continue;
+					temp_dis = get_dis(uav[i].position, uav[j].position);
+					if (temp_dis < min_dis) min_dis = temp_dis;
+				}
+			}
+			fprintf(fp, "%f %f %f %f %f\n", speedmatch, dispersion, dis, angle, min_dis);
+			if (dis <= 100 && angle <= 10) break;		
+			for (i = 1; i <= SIZE; i++) {
+				fprintf(fp2, "%d %d %d %d %d %d\n", (int)uav[i].position.x, (int)uav[i].position.y, (int)uav[i].position.z, (int)uav[i].velocity.x, (int)uav[i].velocity.y, (int)uav[i].velocity.z);
 				update_assemble(i);
 			}
 			crash();
@@ -66,9 +74,9 @@ void main() {
 		update_team();
 		update_centroid();
 	} while (team_change != 0);
-	leader_main = get_main_leader();
-	get_team_leader();
-	for (i = 0; i < SIZE; i++) {
+	/*leader_main = get_main_leader();
+	get_team_leader();*/
+	for (i = 1; i <= SIZE; i++) {
 		fprintf(fp3, "%d  %d %d %d\n", (int)uav[i].position.x, (int)uav[i].position.y, (int)uav[i].position.z, uav[i].teamID);
 	}
 	fclose(fp3);

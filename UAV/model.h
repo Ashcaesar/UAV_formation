@@ -11,7 +11,6 @@ typedef struct {
 	axis position;
 	axis velocity;
 	axis acceleration;
-	double speed;
 	double phi;
 	double theta;
 	int teamID;

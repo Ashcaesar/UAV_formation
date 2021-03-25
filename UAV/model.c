@@ -4,7 +4,7 @@
 #include"model.h"
 #include"parameter.h"
 
-UAV uav[SIZE];
+UAV uav[SIZE+1];
 axis p_origin;
 axis p_start;
 axis p_final;
@@ -22,7 +22,7 @@ void get_Xcg() {
 	Xcg.x = 0;
 	Xcg.y = 0;
 	Xcg.z = 0;
-	for (i = 0; i < SIZE; i++) {
+	for (i = 1; i <= SIZE; i++) {
 		Xcg.x += uav[i].position.x;
 		Xcg.y += uav[i].position.y;
 		Xcg.z += uav[i].position.z;
@@ -42,7 +42,7 @@ double angle_to_target(axis point) {
 	double distance, V = 0, angle = 0;
 	axis Vcg = { 0,0,0 };
 	axis dis = { 0,0,0 };
-	for (i = 0; i < SIZE; i++) {
+	for (i = 1; i <= SIZE; i++) {
 		Vcg.x += uav[i].velocity.x;
 		Vcg.y += uav[i].velocity.y;
 		Vcg.z += uav[i].velocity.z;
@@ -64,8 +64,8 @@ double f_dispersion() {
 	int i, j;
 	double dis, result;
 	result = 0;
-	for (i = 0; i < SIZE; i++) {
-		for (j = 0; j < SIZE; j++) {
+	for (i = 1; i <= SIZE; i++) {
+		for (j = 1; j <= SIZE; j++) {
 			if (i != j) {
 				dis = get_dis(uav[i].position, uav[j].position);
 				result += dis * dis;
@@ -80,8 +80,8 @@ double f_speedmatch() {
 	int i, j;
 	double dis, result;
 	result = 0;
-	for (i = 0; i < SIZE; i++) {
-		for (j = 0; j < SIZE; j++) {
+	for (i = 1; i <= SIZE; i++) {
+		for (j = 1; j <= SIZE; j++) {
 			if (i != j) {
 				dis = get_dis(uav[i].velocity, uav[j].velocity);
 				result += dis * dis;

@@ -9,7 +9,7 @@
 #include"assignment.h"
 
 
-UAV uav[SIZE];
+UAV uav[SIZE+1];
 int team_change;
 int leader_main;
 axis p_final;
@@ -32,9 +32,9 @@ void initial_centroid() {
 	int i, j, num;
 	double sum = 0;
 	double dis;
-	double P[SIZE];
+	double P[SIZE + 1];
 	double probability;
-	double min_dis[SIZE] = { neighbor };
+	double min_dis[SIZE + 1] = { neighbor };
 	
 	srand((unsigned)time(NULL));
 	num = rand() % SIZE;
@@ -43,14 +43,14 @@ void initial_centroid() {
 	//先随机选择第一个质心位置
 
 	for (i = 2; i <= num_team; i++) {
-		for (j = 0; j < SIZE; j++) {
+		for (j = 1; j <= SIZE; j++) {
 			dis = get_min_dis(j, i);
 			min_dis[j] = dis * dis;
 			sum += min_dis[j];
 		}
 		probability = ((double)rand()/RAND_MAX);
-		for (j = 0; j < SIZE; j++) {
-			if (j == 0) P[j] = min_dis[j] / sum;
+		for (j = 1; j <= SIZE; j++) {
+			if (j == 1) P[j] = min_dis[j] / sum;
 			else P[j] = min_dis[j] / sum + P[j - 1];
 			if (P[j] >= probability && uav[j].teamID == -1) {
 				uav[j].teamID = i;
@@ -58,7 +58,7 @@ void initial_centroid() {
 				break;
 			}
 		}	
-		for (j = 0; j < SIZE; j++) min_dis[j] = neighbor;
+		for (j = 1; j <= SIZE; j++) min_dis[j] = neighbor;
 		sum = 0;
 	}	
 }
@@ -67,7 +67,7 @@ void update_team() {
 	int i, j, tempID;
 	double dis, min_dis;
 	team_change = 0;
-	for (i = 0; i < SIZE; i++) {
+	for (i = 1; i <= SIZE; i++) {
 		tempID = 1;
 		min_dis = get_dis(uav[i].position, centroid[1]);
 		for (j = 2; j <= num_team; j++) {
@@ -94,7 +94,7 @@ void update_centroid() {
 		centroid[i].z = 0;
 		num[i] = 0;
 	}
-	for (i = 0; i < SIZE; i++) {
+	for (i = 1; i <= SIZE; i++) {
 		for (j = 1; j <= num_team; j++) {
 			if (uav[i].teamID == j) {
 				centroid[j].x += uav[i].position.x;
@@ -114,9 +114,9 @@ void update_centroid() {
 int get_main_leader() {
 	int i, leader;
 	double dis, min_dis;
-	for (i = 0; i < SIZE; i++) {
-		if (i == 0) {
-			min_dis = get_dis(uav[0].position, p_final);
+	for (i = 1; i <= SIZE; i++) {
+		if (i == 1) {
+			min_dis = get_dis(uav[i].position, p_final);
 			leader = 0;
 		}
 		else {
@@ -139,7 +139,7 @@ void get_team_leader() {
 		min_dis[i] = 1000;
 		team_leader[i] = -1;
 	}
-	for (i = 0; i < SIZE && i != leader_main; i++) {
+	for (i = 1; i <= SIZE && i != leader_main; i++) {
 		for (j = 1; j <= num_team + 1; j++) {
 			if (uav[i].teamID == j) {
 				dis = get_dis(uav[i].position, uav[leader_main].position);
@@ -154,7 +154,7 @@ void get_team_leader() {
 	for (i = 1; i <= num_team; i++) {
 		uav[team_leader[i]].leader = leader_main;
 	}
-	for (i = 0; i < SIZE; i++) {
+	for (i = 1; i <= SIZE; i++) {
 		if (uav[i].leader == -1 || uav[i].leader == leader_main) continue;
 		uav[i].leader = team_leader[uav[i].teamID];
 	}

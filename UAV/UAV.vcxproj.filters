@@ -27,6 +27,9 @@
     <ClCompile Include="model.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="formation.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="parameter.h">
@@ -39,6 +42,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="assignment.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="formation.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
