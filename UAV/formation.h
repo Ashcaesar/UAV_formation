@@ -3,8 +3,8 @@
 
 #include"model.h"
 
-void initial_virtual();
-
-//initial_virtual()初始化虚拟长机参数
+void initial_form();
+void update_form();
+axis f_repel(int);
 
 #endif //

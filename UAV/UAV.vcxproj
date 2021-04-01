@@ -152,13 +152,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="assemble.c" />
-    <ClCompile Include="assignment.c" />
     <ClCompile Include="formation.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="model.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="assignment.h" />
     <ClInclude Include="formation.h" />
     <ClInclude Include="model.h" />
     <ClInclude Include="parameter.h" />

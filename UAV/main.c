@@ -3,83 +3,76 @@
 
 #include"model.h"
 #include"assemble.h"
-#include"assignment.h"
 #include"parameter.h"
+#include"formation.h"
 
-extern UAV uav[SIZE+1];
+extern UAV uav[SIZE + 1];
 extern axis sum;
 extern axis Xcg;
 extern axis p_origin;
-extern axis p_start;
+extern axis p_assemble;
 extern axis p_final;
-extern int leader_main;
-extern int team_change;
+extern axis R[SIZE + 1];
+extern int A[SIZE + 1][SIZE + 1];
 
 //sum临时存储数据用以函数计算
 //Xcg存储集群质心位置
 //p_origin为原点坐标
-//p_start为出发点坐标
+//p_assemble为出发点坐标
 //p_final为终点坐标
-//leader_main存储中心长机编号
-//team_change判定kmeans迭代是否完成
+//R[]存储队形相对位置
+//A[]为通信邻接矩阵
 
 void main() {
 	int i, j;
-	double t, dis, temp_dis, min_dis, angle, dispersion, speedmatch;
+	double t, dis, angle;
 	FILE *fp;
 	FILE *fp2;
-	FILE *fp3;
 	if ((fp = fopen("data/index.txt", "wb")) == NULL) {
-		printf("离散度写入失败!\n");
+		printf("指标写入失败!\n");
 		return;
 	}
 	if ((fp2 = fopen("data/coordinate.txt", "wb")) == NULL) {
 		printf("坐标写入失败!\n");
 		return;
 	}
-	if ((fp3 = fopen("data/team.txt", "wb")) == NULL) {
-		printf("分队写入失败!\n");
-		return;
-	}
 
-		initial_uav();
-		for (t = 0; t < 100; t += delt) {
-			get_Xcg();
-			dis = dis_to_target(p_start);
-			angle = angle_to_target(p_start);
-			dispersion = f_dispersion();
-			speedmatch = f_speedmatch();
-			min_dis = 100;
-			for (i = 1; i <= SIZE; i++) {
-				for (j = 1; j <= SIZE; j++) {
-					if (i == j) continue;
-					temp_dis = get_dis(uav[i].position, uav[j].position);
-					if (temp_dis < min_dis) min_dis = temp_dis;
-				}
-			}
-			fprintf(fp, "%f %f %f %f %f\n", speedmatch, dispersion, dis, angle, min_dis);
-			if (dis <= 100 && angle <= 10) break;		
-			for (i = 1; i <= SIZE; i++) {
-				fprintf(fp2, "%d %d %d %d %d %d\n", (int)uav[i].position.x, (int)uav[i].position.y, (int)uav[i].position.z, (int)uav[i].velocity.x, (int)uav[i].velocity.y, (int)uav[i].velocity.z);
-				update_assemble(i);
-			}
-			crash();
-		}
+	/*----------------------------------------------------------------------------------------------------------------------------------*/
+	/*集结模块*/
+	t = 0;
+	initial_uav();
+	do {
+		if (t > 60) break;
+		get_Xcg();
+		dis = dis_to_target(p_assemble);
+		angle = angle_to_target(p_assemble);
+		fprintf(fp, "%f %f %f %f %f\n", f_speedmatch(), f_dispersion(), dis, angle, f_min_dis());
+		for (i = 1; i <= SIZE; i++) fprintf(fp2, "%.1f %.1f %.1f\n", uav[i].position.x, uav[i].position.y, uav[i].position.z);
 
+		update_assemble();
+		crash();
+		t += delt;
+	} while (dis > 100 || angle > 30);
+	printf("集结完成，用时%.1f秒,发生%d次碰撞\n", t, num_crash);
+
+	/*----------------------------------------------------------------------------------------------------------------------------------*/
+	/*编队模块*/
+	t = 0;
+	num_crash = 0;
+	initial_form();
+	do {
+		if (t > 60) break;
+		get_Xcg();
+		dis = dis_to_target(p_final);
+		angle = angle_to_target(p_final);
+		fprintf(fp, "%f %f %f %f %f\n", f_speedmatch(), f_dispersion(), dis, angle, f_min_dis());
+		for (i = 1; i <= SIZE; i++) fprintf(fp2, "%.1f %.1f %.1f\n", uav[i].position.x, uav[i].position.y, uav[i].position.z);
+		
+		update_form();
+		crash();
+		t += delt;
+	} while (dis > 50 || angle > 30);
+	printf("编队飞行完成，用时%.1f秒,发生%d次碰撞\n", t, num_crash);
 	fclose(fp);
 	fclose(fp2);
-	
-	initial_centroid();
-	do {
-		update_team();
-		update_centroid();
-	} while (team_change != 0);
-	/*leader_main = get_main_leader();
-	get_team_leader();*/
-	for (i = 1; i <= SIZE; i++) {
-		fprintf(fp3, "%d  %d %d %d\n", (int)uav[i].position.x, (int)uav[i].position.y, (int)uav[i].position.z, uav[i].teamID);
-	}
-	fclose(fp3);
-
-	printf("%.2fs crash:%d\n", t, num_crash);
 }

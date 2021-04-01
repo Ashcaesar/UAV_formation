@@ -13,8 +13,7 @@ typedef struct {
 	axis acceleration;
 	double phi;
 	double theta;
-	int teamID;
-	int leader;
+	int flag;
 }UAV;
 
 void get_Xcg();
@@ -23,6 +22,7 @@ double f_dispersion();
 double f_speedmatch();
 double dis_to_target(axis);
 double angle_to_target(axis);
+double f_min_dis();
 
 //axis三维坐标结构体
 //UAV无人机结构体，包括位置、速度、加速度、角度、编队等信息

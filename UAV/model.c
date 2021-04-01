@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 #include<math.h>
 
 #include"model.h"
@@ -6,7 +7,7 @@
 
 UAV uav[SIZE+1];
 axis p_origin;
-axis p_start;
+axis p_assemble;
 axis p_final;
 axis Xcg;
 
@@ -90,4 +91,18 @@ double f_speedmatch() {
 	}
 	result = sqrt(result) / SIZE;
 	return result;
+}
+
+double f_min_dis() {
+	int i, j;
+	double dis, min_dis;
+	min_dis = 1000;
+	for (i = 1; i <= SIZE; i++) {
+		for (j = 11; j <= SIZE; j++) {
+			if (i == j) continue;
+			dis = get_dis(uav[i].position, uav[j].position);
+			if (dis < min_dis) min_dis = dis;
+		}
+	}
+	return min_dis;
 }

@@ -11,7 +11,7 @@ axis tMatch, tAttract, tTarget;
 void initial_uav();
 double limit_uav(double, double, double);
 void crash();
-void update_assemble(int);
+void update_assemble();
 
 //num_crash记录碰撞次数
 //f_match为速度匹配项
