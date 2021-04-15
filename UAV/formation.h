@@ -5,6 +5,6 @@
 
 void initial_form();
 void update_form();
-axis f_repel(int);
+axis f_repulsion(int);
 
 #endif //

@@ -9,8 +9,8 @@
 UAV uav[SIZE+1];
 axis sum = { 0,0,0 };
 axis p_origin = { 0,0,0 };
-axis p_assemble = { 500,500,50 };
-axis p_final = { 1000,1000,50 };
+axis p_assemble = { 500,500,20 };
+axis p_final = {1000,1000,100 };
 
 void initial_uav() {
 	int i;
@@ -20,14 +20,14 @@ void initial_uav() {
 		for (i = 1; i <= SIZE; i++) {
 			uav[i].position.x = rand() % 200;
 			uav[i].position.y = rand() % 200;
-			uav[i].position.z = rand() % 50 - 25;
+			uav[i].position.z = 0;
 		}
 		crash();
 	} while (num_crash > 0);
 
 	for (i = 1; i <= SIZE; i++) {
-		uav[i].velocity.x = rand() % 10;
-		uav[i].velocity.y = rand() % 10;
+		uav[i].velocity.x = 0;
+		uav[i].velocity.y = 0;
 		uav[i].velocity.z = rand() % 5;
 		uav[i].acceleration.x = 0;
 		uav[i].acceleration.y = 0;
@@ -35,7 +35,7 @@ void initial_uav() {
 		uav[i].phi = atan2(uav[i].velocity.z, sqrt(pow(uav[i].velocity.x, 2) + pow(uav[i].velocity.y, 2)));
 		uav[i].theta = atan2(uav[i].velocity.y, uav[i].velocity.x);
 		uav[i].flag = 0;
-	}
+	}	
 }
 
 axis f_match(int i) {
@@ -76,15 +76,13 @@ axis f_attract(int i) {
 	for (j = 1; j <= SIZE; j++) {	
 		if (j != i) {
 			dis = get_dis(uav[i].position, uav[j].position);
-			if ((dis > d) && (dis <= D)) {
-				f = k1 * (pow(dis - d, -theta1) - pow(D - d, -theta1));
+			if (dis <= D) {
+				f = k1 * (D - dis);
 			}
-			else if ((dis > D) && (dis <= neighbor)) {
-				f = k2 * (pow(dis - d, -theta2) - pow(D - d, -theta2));
+			else if (dis <= neighbor) {
+				f = k2 * (D - dis);
 			}
-			else if (dis > neighbor) {
-				f = k3 * (pow(dis, -theta3));
-			}
+			else f = k2 * (D - neighbor);
 			sum.x += f * (uav[i].position.x - uav[j].position.x) / (dis + 1e-6);
 			sum.y += f * (uav[i].position.y - uav[j].position.y) / (dis + 1e-6);
 			sum.z += f * (uav[i].position.z - uav[j].position.z) / (dis + 1e-6);
